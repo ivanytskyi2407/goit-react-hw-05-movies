@@ -1,3 +1,5 @@
+import { AppBar } from './AppBar/AppBar.js';
+
 export const App = () => {
   return (
     <div
@@ -10,7 +12,7 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      React homework template
+      <AppBar></AppBar>
     </div>
   );
 };

@@ -21,6 +21,7 @@ export async function fetchSearchMovie(query, page) {
   );
   try {
     const data = response.data;
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
