@@ -6,7 +6,7 @@ export default function AppBar() {
     <header className={s.header}>
       <nav>
         <NavLink
-          exact
+          exact="true"
           to="/"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
