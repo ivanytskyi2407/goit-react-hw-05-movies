@@ -1,4 +1,4 @@
-import { FetchTrending } from '../API/API';
+import { FetchTrending } from '../../services/API';
 import HomeCard from './HomeCard/HomeCard';
 import { useState, useEffect } from 'react';
 import PageHeading from '../PageHeading/PageHeading';
