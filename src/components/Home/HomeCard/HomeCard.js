@@ -1,11 +1,14 @@
 import s from './HomeCard.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function HomeCard({ films }) {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
   return films.map(({ id, title, poster_path }) => {
     return (
       <li className={s.card}>
-        <Link to={`/film/${id}`} className={s.card__link}>
+        <Link to={`${pathname}${id}`} className={s.card__link}>
           <img
             className={s.card__img}
             src={`https://image.tmdb.org/t/p/w300${poster_path}`}
