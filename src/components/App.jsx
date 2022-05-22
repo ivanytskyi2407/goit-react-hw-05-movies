@@ -1,18 +1,20 @@
-import { AppBar } from './AppBar/AppBar.js';
+import AppBar from './AppBar/AppBar.js';
+import Home from './Home/Home';
+import Movies from './Movies/Movies';
+import { Switch, Route } from 'react-router-dom';
 
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      <AppBar></AppBar>
+    <div className="container">
+      <AppBar />
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/movies">
+          <Movies />
+        </Route>
+      </Switch>
     </div>
   );
 };
