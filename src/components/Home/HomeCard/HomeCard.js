@@ -6,7 +6,7 @@ export default function HomeCard({ films }) {
 
   return films.map(({ id, title, poster_path }) => {
     return (
-      <li className={s.card}>
+      <li key={id} className={s.card}>
         <Link to={`${pathname}${id}`} className={s.card__link}>
           <img
             className={s.card__img}
