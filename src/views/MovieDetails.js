@@ -1,8 +1,8 @@
 import s from './MovieDetails.module.css';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { FetchFilmById } from '../services/API';
-import { Link } from 'react-router-dom';
+
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
@@ -47,6 +47,15 @@ export default function MovieDetails() {
           </div>
         </>
       )}
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <Outlet />
     </>
   );
 }

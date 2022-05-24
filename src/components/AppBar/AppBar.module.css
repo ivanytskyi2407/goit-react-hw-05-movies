@@ -21,6 +21,12 @@
   align-items: center;
   min-height: 80px;
   margin-bottom: 16px;
-  /* border-bottom: 1px solid #2a363b; */
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.footer {
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: rgba(34, 60, 80, 0.2);
 }
