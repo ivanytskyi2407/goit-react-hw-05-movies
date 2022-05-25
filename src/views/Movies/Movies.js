@@ -1,44 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FetchFilmSearch } from '../../services/API';
-import { Link } from 'react-router-dom';
-export default function Movies() {
-  const [query, setQuery] = useState('');
-  const [data, setData] = useState(null);
+import { Link, useSearchParams } from 'react-router-dom';
+import s from './Movies.module.css';
 
-  const handleQueryChange = e => {
-    setQuery(e.currentTarget.value.toLowerCase());
-  };
+export default function Movies() {
+  const [data, setData] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filmQuery = searchParams.get('film') || '';
+
+  useEffect(() => {
+    if (filmQuery) {
+      FetchFilmSearch(filmQuery).then(({ results }) => {
+        setData(results);
+      });
+    }
+  }, [filmQuery]);
+
   const handleSubmit = e => {
     e.preventDefault();
-    if (query.trim() === '') {
-      return alert('Введіть назву картинки');
-    }
-    FetchFilmSearch(query).then(({ results }) => {
-      setData(results);
-    });
-    setQuery('');
+    const query = e.target.search.value;
+    setSearchParams({ film: query });
   };
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className={s.SearchForm} onSubmit={handleSubmit}>
+        <button className={s.SearchFormbtn} type="submit" />
         <input
-          type="text"
+          className={s.SearchFormInput}
+          type="search"
+          name="search"
           autoComplete="off"
           autoFocus
-          value={query}
-          placeholder="Search images and photos"
-          onChange={handleQueryChange}
+          placeholder="Search films"
         />
-        <button type="submit">
-          <span className="button-label">Search</span>
-        </button>
       </form>
-      <ul>
+      <ul className={s.list}>
         {data &&
-          data.map(({ id, original_title }) => {
+          data.map(({ id, title }) => {
             return (
-              <li>
-                <Link to={`${id}`}>{original_title}</Link>
+              <li key={id} className={s.item}>
+                <Link className={s.item} to={`${id}`}>
+                  <h3>{title}</h3>
+                </Link>
               </li>
             );
           })}

@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 export default function AppBar() {
   return (
-    <>
+    <div className="container">
       <header className={s.header}>
         <nav>
           <NavLink
@@ -24,7 +24,6 @@ export default function AppBar() {
       <main>
         <Outlet />
       </main>
-      <footer className={s.footer}>Footer</footer>
-    </>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FetchFilmReviews } from '../../services/API';
+import s from './Reviews.module.css';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -19,7 +20,7 @@ export default function Reviews() {
       {reviews && reviews.length > 0 ? (
         <ul>
           {reviews.map(({ author, content, id }) => (
-            <li key={author}>
+            <li className={s.item} key={author}>
               <h2>Author: {author}</h2>
               <p>{content}</p>
             </li>

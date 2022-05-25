@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   return (
-    <div className="container">
+    <>
       <Routes>
         <Route path="/" element={<AppBar />}>
           <Route index exact="true" element={<Home />} />
@@ -21,6 +21,6 @@ export const App = () => {
           <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 };

@@ -1,12 +1,16 @@
 import s from './MovieDetails.module.css';
 import { useState, useEffect } from 'react';
 import { FetchFilmById } from '../services/API';
-
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     FetchFilmById(movieId).then(film => {
@@ -18,7 +22,9 @@ export default function MovieDetails() {
     <>
       {filmInfo && (
         <>
-          <Link to="/">Go back</Link>
+          <button className={s.btn} onClick={goBack}>
+            Go Back
+          </button>
           <div className={s.wrapper}>
             <img
               className={s.picture}
@@ -47,12 +53,16 @@ export default function MovieDetails() {
           </div>
         </>
       )}
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
+      <ul className={s.list}>
+        <li className={s.item}>
+          <Link className={s.link} to="cast">
+            Cast
+          </Link>
         </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
+        <li className={s.item}>
+          <Link className={s.link} to="reviews">
+            Reviews
+          </Link>
         </li>
       </ul>
       <Outlet />
