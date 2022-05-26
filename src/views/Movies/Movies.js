@@ -2,17 +2,24 @@ import { useState, useEffect } from 'react';
 import { FetchFilmSearch } from '../../services/API';
 import { Link, useSearchParams } from 'react-router-dom';
 import s from './Movies.module.css';
+import { Loader } from '../../components/Loader/Loader';
 
 export default function Movies() {
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const filmQuery = searchParams.get('film') || '';
 
   useEffect(() => {
+    setIsLoading(true);
     if (filmQuery) {
-      FetchFilmSearch(filmQuery).then(({ results }) => {
-        setData(results);
-      });
+      FetchFilmSearch(filmQuery)
+        .then(({ results }) => {
+          setData(results);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   }, [filmQuery]);
 
@@ -24,6 +31,7 @@ export default function Movies() {
 
   return (
     <>
+      {isLoading && <Loader />}
       <form className={s.SearchForm} onSubmit={handleSubmit}>
         <button className={s.SearchFormbtn} type="submit" />
         <input

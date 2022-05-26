@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Loader } from './Loader/Loader';
 
 // import AppBar from './AppBar/AppBar.js';
 // import Home from './Home/Home';
@@ -19,7 +20,7 @@ const Page404 = lazy(() => import('./Page404/Page404'));
 
 export const App = () => {
   return (
-    <Suspense fallback={<h1>ЗАГРУЖАЄМО</h1>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<AppBar />}>
           <Route index exact="true" element={<Home />} />
