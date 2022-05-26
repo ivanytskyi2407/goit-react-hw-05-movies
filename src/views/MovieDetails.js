@@ -1,15 +1,31 @@
 import s from './MovieDetails.module.css';
 import { useState, useEffect } from 'react';
 import { FetchFilmById } from '../services/API';
-import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
+  const [url, setUrl] = useState(null);
 
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state) {
+      const { pathname, search } = state;
+      setUrl(`${pathname}${search}`);
+    }
+  }, [state]);
+
   const goBack = () => {
-    navigate(-1);
+    navigate(url);
   };
 
   useEffect(() => {
@@ -22,9 +38,8 @@ export default function MovieDetails() {
     <>
       {filmInfo && (
         <>
-          <button className={s.btn} onClick={goBack}>
-            Go Back
-          </button>
+          <button onClick={goBack}>GoBack</button>
+          {/* <Link to={`${pathname}/${search}`}>Go Back</Link> */}
           <div className={s.wrapper}>
             <img
               className={s.picture}

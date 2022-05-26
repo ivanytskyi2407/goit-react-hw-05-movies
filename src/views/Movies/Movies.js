@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FetchFilmSearch } from '../../services/API';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import s from './Movies.module.css';
 import { Loader } from '../../components/Loader/Loader';
 
@@ -9,12 +9,14 @@ export default function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const filmQuery = searchParams.get('film') || '';
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
-    setIsLoading(true);
     if (filmQuery) {
       FetchFilmSearch(filmQuery)
         .then(({ results }) => {
+          setIsLoading(true);
           setData(results);
         })
         .finally(() => {
@@ -48,7 +50,7 @@ export default function Movies() {
           data.map(({ id, title }) => {
             return (
               <li key={id} className={s.item}>
-                <Link className={s.item} to={`${id}`}>
+                <Link className={s.item} to={`${id}`} state={location}>
                   <h3>{title}</h3>
                 </Link>
               </li>
