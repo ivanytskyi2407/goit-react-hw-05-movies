@@ -1,6 +1,6 @@
 import s from './MovieDetails.module.css';
 import { useState, useEffect } from 'react';
-import { FetchFilmById } from '../services/API';
+import { FetchFilmById } from '../../services/API';
 import {
   Link,
   Outlet,
