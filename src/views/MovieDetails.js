@@ -31,7 +31,9 @@ export default function MovieDetails() {
     <>
       {filmInfo && (
         <>
-          <button onClick={goBack}>GoBack</button>
+          <button onClick={goBack} className={s.btn}>
+            Go Back
+          </button>
           {/* <Link to={`${pathname}/${search}`}>Go Back</Link> */}
           <div className={s.wrapper}>
             <img
