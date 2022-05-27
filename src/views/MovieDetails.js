@@ -15,10 +15,12 @@ export default function MovieDetails() {
 
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { pathname, search } = state;
 
   const goBack = () => {
-    navigate(`${pathname}${search}`);
+    if (state) {
+      const { pathname, search } = state;
+      navigate(`${pathname}${search}`);
+    }
   };
 
   useEffect(() => {
