@@ -10,7 +10,6 @@ export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const filmQuery = searchParams.get('film') || '';
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     if (filmQuery) {

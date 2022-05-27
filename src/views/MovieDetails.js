@@ -12,20 +12,13 @@ import {
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
-  const [url, setUrl] = useState(null);
 
   const navigate = useNavigate();
   const { state } = useLocation();
-
-  useEffect(() => {
-    if (state) {
-      const { pathname, search } = state;
-      setUrl(`${pathname}${search}`);
-    }
-  }, [state]);
+  const { pathname, search } = state;
 
   const goBack = () => {
-    navigate(url);
+    navigate(`${pathname}${search}`);
   };
 
   useEffect(() => {
