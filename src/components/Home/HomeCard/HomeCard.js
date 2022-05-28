@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function HomeCard({ films }) {
   const location = useLocation();
+  console.log(location);
   return films.map(({ id, title, poster_path }) => {
     return (
       <li key={id} className={s.card}>
