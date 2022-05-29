@@ -49,7 +49,11 @@ export default function Movies() {
           data.map(({ id, title }) => {
             return (
               <li key={id} className={s.item}>
-                <Link className={s.item} to={`${id}`} state={location}>
+                <Link
+                  className={s.item}
+                  to={`${id}`}
+                  state={{ from: location }}
+                >
                   <h3>{title}</h3>
                 </Link>
               </li>

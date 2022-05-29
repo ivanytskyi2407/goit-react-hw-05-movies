@@ -15,14 +15,14 @@ export default function MovieDetails() {
   const [backUrl, setBackUrl] = useState(null);
 
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
-    if (state) {
-      const { pathname, search } = state;
+    if (location?.state?.from) {
+      const { pathname, search } = location?.state?.from;
       setBackUrl(`${pathname}${search}`);
     }
-  }, [state]);
+  }, [location?.state?.from]);
 
   const goBack = () => {
     navigate(backUrl);
