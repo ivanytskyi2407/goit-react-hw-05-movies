@@ -22,6 +22,7 @@ export default function MovieDetails() {
       const { pathname, search } = location?.state?.from;
       setBackUrl(`${pathname}${search}`);
     }
+    setBackUrl('/');
   }, [location?.state?.from]);
 
   const goBack = () => {
