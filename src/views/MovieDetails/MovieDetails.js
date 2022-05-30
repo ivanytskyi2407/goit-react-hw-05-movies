@@ -12,28 +12,22 @@ import {
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [filmInfo, setFilmInfo] = useState(null);
-  const [backUrl, setBackUrl] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    if (location?.state?.from) {
-      const { pathname, search } = location?.state?.from;
-      setBackUrl(`${pathname}${search}`);
-    }
-    setBackUrl('/');
-  }, [location?.state?.from]);
-
-  const goBack = () => {
-    navigate(backUrl);
-  };
-
   useEffect(() => {
     FetchFilmById(movieId).then(film => {
       setFilmInfo(film);
     });
   }, [movieId]);
+
+  const goBack = () => {
+    if (location?.state?.from) {
+      const { pathname, search } = location?.state?.from;
+      return navigate(`${pathname}${search}`);
+    }
+    return navigate('/');
+  };
 
   return (
     <>
@@ -42,7 +36,6 @@ export default function MovieDetails() {
           <button onClick={goBack} className={s.btn}>
             Go Back
           </button>
-          {/* <Link to={`${pathname}/${search}`}>Go Back</Link> */}
           <div className={s.wrapper}>
             <img
               className={s.picture}
@@ -73,12 +66,20 @@ export default function MovieDetails() {
       )}
       <ul className={s.list}>
         <li className={s.item}>
-          <Link className={s.link} to="cast">
+          <Link
+            className={s.link}
+            to="cast"
+            state={{ from: location?.state?.from }}
+          >
             Cast
           </Link>
         </li>
         <li className={s.item}>
-          <Link className={s.link} to="reviews">
+          <Link
+            className={s.link}
+            to="reviews"
+            state={{ from: location?.state?.from }}
+          >
             Reviews
           </Link>
         </li>

@@ -6,8 +6,6 @@ import s from './Reviews.module.css';
 export default function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
-  // const location = useLocation();
-  // console.log(location);
 
   useEffect(() => {
     const fetchReviews = async movieId => {
